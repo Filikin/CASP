@@ -1,0 +1,67 @@
+<apex:page standardController="Contact" showHeader="false" cache="true" renderAs="pdf" applyHtmlTag="false">
+	<head>
+    	<style type="text/css" media="print">
+			@page 
+			{
+				@top-right
+				{
+					content: element(header);
+				}
+                @bottom-left 
+                {
+                    content: element(footer);
+                }
+             }
+             div.header
+             {
+	             padding: 10px;
+                 position: running(header);
+                 text-align:right;
+             }
+             div.footer 
+            {
+	            display: block;
+                padding: 10px;
+            	position: running(footer);
+                text-align:right;
+            }
+			.pagenumber:before 
+            {
+            	content: counter(page);
+            }
+            .pagecount:before 
+            {
+	            content: counter(pages);
+            }
+		</style>
+	</head>
+
+    <div class="header">
+		<div>Case notes for {!Contact.name} printed on &nbsp; <apex:outputText value="{0,date,dd' 'MMMM' 'yyyy}">
+    	<apex:param value="{!TODAY()}" /> 
+</apex:outputText></div>
+	</div>
+    <div class="footer">
+	    <div>Page <span class="pagenumber"/> of <span class="pagecount"/></div>
+    </div>  
+    <div class="content">	  
+    	<apex:pageBlock title="{!$ObjectType.Contact.fields.Project_Worker_Case_Notes__c.Label}">
+	  		<apex:OutputField value="{!Contact.Project_Worker_Case_Notes__c}"/>
+ 		</apex:pageBlock>
+    	<apex:pageBlock title="{!$ObjectType.Contact.fields.Counsellor_Case_Notes__c.Label}">
+	  		<apex:OutputField value="{!Contact.Counsellor_Case_Notes__c}"/>
+ 		</apex:pageBlock>
+    	<apex:pageBlock title="{!$ObjectType.Contact.fields.Family_Support_Case_Notes__c.Label}">
+	  		<apex:OutputField value="{!Contact.Family_Support_Case_Notes__c}"/>
+ 		</apex:pageBlock>
+    	<apex:pageBlock title="{!$ObjectType.Contact.fields.CE_Recovery_Case_Notes__c.Label}">
+	  		<apex:OutputField value="{!Contact.CE_Recovery_Case_Notes__c}"/>
+ 		</apex:pageBlock>
+    	<apex:pageBlock title="{!$ObjectType.Contact.fields.Prison_Links_Case_Notes__c.Label}">
+	  		<apex:OutputField value="{!Contact.Prison_Links_Case_Notes__c}"/>
+ 		</apex:pageBlock>
+    	<apex:pageBlock title="{!$ObjectType.Contact.fields.Medical_Case_Notes__c.Label}">
+	  		<apex:OutputField value="{!Contact.Medical_Case_Notes__c}"/>
+ 		</apex:pageBlock>
+ 	</div>
+</apex:page>
